@@ -1,0 +1,4 @@
+Bundle-Name: finder-web
+Bundle-SymbolicName: br.com.vertigo
+Bundle-Version: 1.0.0
+Export-Package: br.com.vertigo.constants
