@@ -24,72 +24,23 @@
                 <h3>Filtros</h3>
             </div>
 
-            <div class="col-md-6">
-                <aui:select name="selectSegmentos" label="Segmento">
+            <c:forEach var="entry" items="${categorias}">
+                <c:set var="key" value="${entry.key}" />
 
-                    <aui:option>Todos</aui:option>
+                <div class="col-md-6">
+                    <aui:select name="select${key}" label="${key}">
+                        <aui:option value="">Todos</aui:option>
 
-                    <c:forEach var="segmento" items="${categorias['Segmentos']}">
-                        <aui:option>${segmento.name}</aui:option>
-                    </c:forEach>
+                        <c:forEach var="categoria" items="${entry.value}">
+                            <aui:option value="${categoria.categoryId}">
+                                ${categoria.name}
+                            </aui:option>
+                        </c:forEach>
+                    </aui:select>
+                </div>
 
-                </aui:select>
-            </div>
-
-            <div class="col-md-6">
-                <aui:select name="selectFaseProjeto" label="Fase do projeto">
-
-                    <aui:option>Todos</aui:option>
-
-                    <c:forEach var="fase" items="${categorias['Fase do projeto']}">
-                        <aui:option>${fase.name}</aui:option>
-                    </c:forEach>
-
-                </aui:select>
-            </div>
-
-            <div class="col-md-6">
-                <aui:select name="selectClassificacao" label="Classificação de Entrega">
-
-                    <aui:option>Todos</aui:option>
-
-                    <c:forEach var="classificacao" items="${categorias['Classificação de Entrega']}">
-                        <aui:option>${classificacao.name}</aui:option>
-                    </c:forEach>
-
-                </aui:select>
-            </div>
-
-            <div class="col-md-6">
-                <aui:select name="selectMercado" label="Mercado">
-
-                    <aui:option>Todos</aui:option>
-
-                    <c:forEach var="mercado" items="${categorias['Mercado']}">
-                        <aui:option>${mercado.name}</aui:option>
-                    </c:forEach>
-
-                </aui:select>
-            </div>
-
-            <div class="col-md-6">
-
-                <aui:select name="selectStatus" label="Status">
-
-                    <aui:option>Todos</aui:option>
-
-                    <c:forEach var="status" items="${categorias['Status']}">
-                        <aui:option>${status.name}</aui:option>
-                    </c:forEach>
-
-                </aui:select>
-
-            </div>
-
-
-        </div>
+            </c:forEach>
 
     </div>
 
 </aui:form>
-

@@ -8,6 +8,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.ServiceContextFactory;
+import com.liferay.portal.kernel.theme.ThemeDisplay;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
@@ -43,6 +44,13 @@ public class FinderWebPortlet extends MVCPortlet {
 		try {
 
 			ServiceContext serviceContext = ServiceContextFactory.getInstance(renderRequest);
+
+			ThemeDisplay themeDisplay = serviceContext.getThemeDisplay();
+
+			serviceContext.getPortletPreferencesIds();
+
+			Locale actualLocale = themeDisplay.getLocale();
+
 			long companyId = serviceContext.getCompanyId();
 
 			List<AssetVocabulary> companyVocabularies = assetVocabularyLocalService.getCompanyVocabularies(companyId);
@@ -61,7 +69,7 @@ public class FinderWebPortlet extends MVCPortlet {
 
                 List<AssetCategory> lista = new ArrayList<>(li.getCategories());
 
-				categoriasTags.put(li.getTitle(Locale.US), lista);
+				categoriasTags.put(li.getTitle(actualLocale), lista);
 			});
 
 
