@@ -7,6 +7,9 @@ taglib uri="http://liferay.com/tld/portlet" prefix="liferay-portlet" %><%@
 taglib uri="http://liferay.com/tld/theme" prefix="liferay-theme" %><%@
 taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
 <%@ taglib uri="http://liferay.com/tld/clay" prefix="clay" %>
+<%@ page import="br.com.vertigo.constants.CommandNames" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="clay" uri="http://liferay.com/tld/clay" %>
 
 <liferay-theme:defineObjects />
 
