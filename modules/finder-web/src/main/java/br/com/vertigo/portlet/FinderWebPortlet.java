@@ -50,17 +50,23 @@ public class FinderWebPortlet extends MVCPortlet {
         try {
 
             ServiceContext serviceContext = ServiceContextFactory.getInstance(renderRequest);
-            long companyId = serviceContext.getCompanyId();
 
-            List<AssetVocabulary> companyVocabularies = assetVocabularyLocalService.getCompanyVocabularies(companyId);
+            String vocabularyId = _configuration.vocabularyId();
+            String templateId = _configuration.templateId();
+
+            String[] numerosArray = vocabularyId.split(",");
+            long[] numerosLong = new long[numerosArray.length];
+
+            for (int i = 0; i < numerosArray.length; i++) {
+                numerosLong[i] = Long.parseLong(numerosArray[i]);
+            }
 
             List<AssetVocabulary> listaFiltrada = new ArrayList<>();
 
-            companyVocabularies.forEach(cv -> {
-                if (!cv.getUserName().isEmpty()) {
-                    listaFiltrada.add(cv);
-                }
-            });
+            for (long num : numerosLong) {
+                AssetVocabulary vocabulary = assetVocabularyLocalService.getVocabulary(num);
+                listaFiltrada.add(vocabulary);
+            }
 
             Map<String, List<AssetCategory>> categoriasTags = new HashMap<>();
 
@@ -71,20 +77,11 @@ public class FinderWebPortlet extends MVCPortlet {
                 categoriasTags.put(li.getTitle(Locale.US), lista);
             });
 
-            // exemplo pegando valores das configurações
-            String vocabularyId = _configuration.vocabularyId();
-            String templateId = _configuration.templateId();
-
-            System.out.println("Vocabulary ID: " + vocabularyId);
-            System.out.println("Template ID: " + templateId);
-
-
             renderRequest.setAttribute("categorias", categoriasTags);
 
         } catch (PortalException e) {
             throw new RuntimeException(e);
         }
-
 
         super.render(renderRequest, renderResponse);
     }

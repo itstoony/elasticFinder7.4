@@ -4,7 +4,7 @@ import aQute.bnd.annotation.metatype.Meta;
 import com.liferay.portal.configuration.metatype.annotations.ExtendedObjectClassDefinition;
 
 @ExtendedObjectClassDefinition(
-        category = "category-b3",
+        category = "Finder B3",
         scope = ExtendedObjectClassDefinition.Scope.SYSTEM
 )
 @Meta.OCD(id = "br.com.vertigo.config.FinderConfiguration")
